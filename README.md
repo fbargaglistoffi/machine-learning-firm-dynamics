@@ -26,6 +26,14 @@ This simple step-by-step guide should aid the reader in designing a supervised l
 
 ## Supervised Learning Algorithms
 
+### Decision Trees
+
+### Random Forest
+
+### Support Vector Machines
+
+### Artificial Neural Network
+
 Temptative outline
 
 The function takes as inputs:
@@ -42,7 +50,7 @@ The _mm_bcf_iv_ function returns the discovered sub-population, the conditional 
 
 More details on the R code for the BCF-IV function can be found [here](https://github.com/barstoff/BCF-IV/blob/master/Functions/BCF-IV_in_detail.pdf).
 
-# Example usage
+#### Example usage
 
 ```R
 source("bcf-iv.R")
@@ -50,12 +58,6 @@ source("bcf-iv.R")
 bcf_iv(y, w, z, x, max_depth = 2, n_burn= 2000, n_sim= 2000, binary = TRUE)
 
 mm_bcf_iv(y, w, z, x, max_depth = 2, n_burn= 2000, n_sim= 2000, binary = TRUE)
+```
 
-### Decision Trees
-
-### Random Forest
-
-### Support Vector Machines
-
-### Artificial Neural Network
 
