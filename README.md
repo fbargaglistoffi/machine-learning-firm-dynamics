@@ -24,6 +24,8 @@ This simple step-by-step guide should aid the reader in designing a supervised l
 
 8. Once prediction performance has been assessed, the algorithm can be used to predict outcomes for observations for which the outcome is unknown. Note that valid predictions require that new observations should contain similar features and need to be independent from the outcome of old ones
 
+## Splitting Data
+
 ## Supervised Learning Algorithms
 
 ### Decision Trees
