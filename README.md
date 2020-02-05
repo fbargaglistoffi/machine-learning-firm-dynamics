@@ -34,10 +34,10 @@ Decision trees commonly consist of a sequence of binary decision rules (nodes) o
 
 ### Random Forest
 
-##### Description
+#### Description
 Instead of estimating just one DT, random forest resamples the training set observations to estimate multiple trees. For each tree at each node a sample of $m$ predictors is chosen randomly from the feature space. To obtain the final prediction the outcomes all trees are averaged or in classification tasks the chosen by majority vote (see also the original contribution of Breiman, 2001)
 
-##### Function in R
+#### Example usage in R
 We focus on the function _RandomForest_ in the *R* package *RandomForest*. The documentation can be found [here](https://www.rdocumentation.org/packages/randomForest/versions/4.6-14/topics/randomForest).
 
 Selection of inputs the function takes :
