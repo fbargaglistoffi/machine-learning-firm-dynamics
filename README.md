@@ -34,7 +34,44 @@ Decision trees commonly consist of a sequence of binary decision rules (nodes) o
 
 ### Random Forest
 
+#### Description
 Instead of estimating just one DT, random forest resamples the training set observations to estimate multiple trees. For each tree at each node a sample of $m$ predictors is chosen randomly from the feature space. To obtain the final prediction the outcomes all trees are averaged or in classification tasks the chosen by majority vote (see also the original contribution of Breiman, 2001)
+
+#### Example usage in R
+We focus on the function _RandomForest_ in the *R* package *RandomForest*. The documentation can be found [here](https://www.rdocumentation.org/packages/randomForest/versions/4.6-14/topics/randomForest).
+
+Selection of inputs the function takes :
+
+* <tt>`x`</tt>: the feature matrix of the training set (NxP);
+* <tt>`y`</tt>: the outcome variable of the training set (Nx1);
+* <tt>`xtest`</tt>: (optional) the feature matrix of the testing set (MxP);
+* <tt>`ytest`</tt>: (optional) the outcome variable of the testing set (Mx1);
+* <tt>`mtry`</tt>: (optional) number of variables randomly sampled as candidates at each split. Note that the default values are different for classification (sqrt(P) where P is number of features and regression (P/3);
+* <tt>`ntree`</tt>: (optional) number of trees to grow. This should not be set to too small a number, to ensure that every input row gets predicted at least a few times;
+* <tt>`importance`</tt>: (optional) Should importance of predictors be assessed? ;
+* <tt>`keep.forest`</tt>: (optional) Should the forest be stored in the object (for later prediction tasks)? ;
+* <tt>`seed`</tt>: (optional) make RF estimation result reproducable? ;
+
+The _RandomForest_ function returns an object which is a list containing information such as:  the predicted values of the testing set in `$test$predicted`, importance measures in `$importance` and the entire forest `$forest` if `keep.forest==TRUE`.
+
+
+
+
+```R
+install.package("randomForest") #if not already installed
+library("randomForest")
+library("pROC") 
+
+      obj_rf=randomForest(trainfeatures,y=trainoutcome, xtest=testfeatures,ytest=testoutcome, mtry=8, ntree=500, importance=TRUE, keep.forest=FALSE, seed=34)
+      
+      #generate table that compares true outcomes of the testing set with predicted outcomes of random forest
+        rf_tab= table(true=testoutcome, pred= obj_rf$test$predicted )
+      #generate ROC object based on predictions in testing set
+        rf_roc=roc(testoutcome~ obj_rf$test$votes[,2])
+      #calculate AUC value of predictions in testing set
+        rf_auc=pROC::auc(rf_roc)
+```
+
 
 ### Support Vector Machines
 
