@@ -1,6 +1,6 @@
 # Supervised Learning for the Prediction of Firm Dynamics
 
-Repository for the chapter on [<a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a>] by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni.
+Repository for the chapter on <a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a> by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni.
 
 ## A Simple Supervised Learning Routine
 
@@ -31,6 +31,8 @@ This simple step-by-step guide should aid the reader in designing a supervised l
 ### Decision Trees
 
 Decision trees commonly consist of a sequence of binary decision rules (nodes) on which the tree splits into branches (edges). At each final branch (leaf node) a decision regarding the outcome is estimated.  The sequence of decision rules and the location of each cut-off point is based on minimizing a measure of node purity (e.g., Gini index, or entropy). Decision trees are easy to interpret but sensitive to changes in the feature space, frequently lowering their out of sample performance (see Breiman 2017 for a detailed introduction).
+
+
 
 ### Random Forest
 
