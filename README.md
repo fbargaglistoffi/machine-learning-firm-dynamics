@@ -1,6 +1,7 @@
 # Supervised Learning for the Prediction of Firm Dynamics
 
-Repository for the chapter on <a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a> by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni. </br>
+Repository for the Chapter on <a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a> by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni in the book "Data Science for Economics and Finance: Methodologies and Applications" by S. Consoli,  D. Reforgiato Recupero, M. Saisana. 
+
 The following repository is organized in two Sections: in the first Section we introduce a step-by-step guide for the reader that is new to machine learning to guide her/him in designing a supervised learning routine; in the Second section we introduce the main algorithms that were used for prediction tasks relevantat different stages of the company life cycle together with a simple guide on their implementation in *R*.
 
 <a href="https://arxiv.org/abs/1706.09523">Here</a> we show how to implement the supervised learning routine to predict bankruptcy on a sample of a firm level dataset. For each step of the routine we provide details and comments on the *R* code.
