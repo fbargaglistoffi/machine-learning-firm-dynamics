@@ -1,6 +1,6 @@
 # Supervised Learning for the Prediction of Firm Dynamics
 
-Repository for the chapter on "Supervised learning for the prediction of firm dynamics" by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni
+Repository for the chapter on [<a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a>] by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni.
 
 ## A Simple Supervised Learning Routine
 
