@@ -1,8 +1,11 @@
 # Supervised Learning for the Prediction of Firm Dynamics
 
-Repository for the chapter on <a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a> by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni.
+Repository for the chapter on <a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a> by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni. </br>
+The following repository is organized in two Sections: in the first Section we introduce a step-by-step guide for the reader that is new to machine learning to guide her/him in designing a supervised learning routine; in the Second section we introduce the main algorithms that were used for prediction tasks relevantat different stages of the company life cycle together with a simple guide on their implementation in *R*.
 
-## A Simple Supervised Learning Routine
+<a href="https://arxiv.org/abs/1706.09523">Here</a> we show how to implement the supervised learning routine to predict bankruptcy on a sample of a firm level dataset. For each step of the routine we provide details and comments on the *R* code.
+
+# 1. A Simple Supervised Learning Routine
 
 This simple step-by-step guide should aid the reader in designing a supervised learning (SL) routine to predict outcomes from input data.
     
@@ -24,17 +27,15 @@ This simple step-by-step guide should aid the reader in designing a supervised l
 
 8. Once prediction performance has been assessed, the algorithm can be used to predict outcomes for observations for which the outcome is unknown. Note that valid predictions require that new observations should contain similar features and need to be independent from the outcome of old ones.
 
-## Splitting Data
+# 2. Supervised Learning Algorithms
 
-## Supervised Learning Algorithms
-
-### Decision Trees
+## 2.1 Decision Trees
 
 Decision trees commonly consist of a sequence of binary decision rules (nodes) on which the tree splits into branches (edges). At each final branch (leaf node) a decision regarding the outcome is estimated.  The sequence of decision rules and the location of each cut-off point is based on minimizing a measure of node purity (e.g., Gini index, or entropy). Decision trees are easy to interpret but sensitive to changes in the feature space, frequently lowering their out of sample performance (see Breiman 2017 for a detailed introduction).
 
 
 
-### Random Forest
+## 2.2 Random Forest
 
 #### Description
 Instead of estimating just one DT, random forest resamples the training set observations to estimate multiple trees. For each tree at each node a sample of $m$ predictors is chosen randomly from the feature space. To obtain the final prediction the outcomes all trees are averaged or in classification tasks the chosen by majority vote (see also the original contribution of Breiman, 2001)
@@ -75,11 +76,11 @@ library("pROC")
 ```
 
 
-### Support Vector Machines
+## 2.3 Support Vector Machines
 
 Support vector machines (SVM) & Support vector machine algorithms estimate a hyperplane over the feature space to classify observations. The vectors that span the hyperplane are called support vectors. They are chosen such that the overall distance (called margin) between the data points and the hyperplane as well as the prediction accuracy is maximized (see also Ssteinwart 2008)
 
-### Artificial Neural Network
+## 2.4 Artificial Neural Network
 
  (Deep) Artificial Neural Networks (ANN) & Inspired from biological networks, every neural network consists of at least three layers: an input layer containing feature information, at least one hidden layer (deep ANN are ANN with more than one hidden layer), and an output layer returning the predicted values. Each Layer consists of nodes (neurons) who are connected via edges across layers. During the learning process, edges that are more important are reinforced. Neurons may then only send a signal if the signal received is strong enough (see for example Hassoun, ).
 
@@ -100,7 +101,7 @@ The _mm_bcf_iv_ function returns the discovered sub-population, the conditional 
 
 More details on the R code for the BCF-IV function can be found [here](https://github.com/barstoff/BCF-IV/blob/master/Functions/BCF-IV_in_detail.pdf).
 
-#### Example usage
+### Example usage
 
 ```R
 source("bcf-iv.R")
