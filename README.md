@@ -37,7 +37,42 @@ Decision trees commonly consist of a sequence of binary decision rules (nodes) o
 
 ### Example usage in R
 
+We focus on the function _Rpart_ in the *R* package *Rpart*. The documentation can be found [here](https://www.rdocumentation.org/packages/rpart/versions/4.1-15/topics/rpart).
 
+* <tt>`formula`</tt>: is in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1+predictor2+ect.);
+* <tt>`data`</tt>: specifies the data frame;
+* <tt>`method`</tt>: "class" for a classification tree, "anova" for a regression tree;
+* <tt>`control`</tt>: optional parameters for controlling tree growth. For example, control=rpart.control(minsplit=30, cp=0.001) requires that the minimum number of observations in a node be 30 before attempting a split and that a split must decrease the overall lack of fit by a factor of 0.001 (cost complexity factor) before being attempted.
+
+```R
+# Classification Tree with rpart
+library(rpart)
+
+# grow tree
+dt <- rpart(trainoutcome ~ trainfeatures, method="class", data= train_data, control=rpart.control(minsplit=30, cp=0.001))
+
+    printcp(dt) # display the results
+    plotcp(dt) # visualize cross-validation results
+    summary(dt) # detailed summary of splits
+
+# plot tree
+plot(dt, uniform=TRUE, main="Classification Tree")
+text(dt, use.n=TRUE, all=TRUE, cex=.8)
+
+# create attractive postscript plot of tree
+post(dt, file = "c:/tree.ps",
+   title = "Classification Tree")
+   
+# get predicted values
+dt.pred <- predict(dt, newdata=test, type='class')
+   
+         # generate table that compares true outcomes of the testing set with predicted outcomes of decisiontree
+        dt_tab= table(true=testoutcome, pred= dt)
+        # generate ROC object based on predictions in testing set
+        dt_roc=roc(testoutcome ~ dt)
+        #calculate AUC value of predictions in testing set
+        dt_auc=pROC::auc(dt_roc)
+```
 
 ## 2.2 Random Forest
 
