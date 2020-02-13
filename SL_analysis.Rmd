@@ -2,7 +2,8 @@
 title: "Supervised learning for firm dynamics"
 author: "Falco J. Bargagli-Stoffi, Jan Niederreiter"
 date: "15/2/2020"
-output: pdf_document
+    pdf_document: 
+    keep_tex:  true
 ---
 
 ```{r setup, include=FALSE}
