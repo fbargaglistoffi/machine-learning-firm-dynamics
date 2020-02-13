@@ -1,7 +1,7 @@
 ---
 title: "Supervised learning for firm dynamics"
 author: "Falco J. Bargagli-Stoffi, Jan Niederreiter"
-date: "13/2/2020"
+date: "15/2/2020"
 output: pdf_document
 ---
 
@@ -9,22 +9,131 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Introduction
+
 ## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This is an \texttt{R Markdown} document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using \texttt{R Markdown} see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded \texttt{R} code chunks within the document. You can embed an R code chunks like the following.
 
-```{r}
-rm(list=ls())
-setwd("G:\\Il mio Drive\\Research\\Book Chapter in Data Science for Economics and Finance\\Draft\\supervised-learning-firm-dynamics\\Data")
+## Packages Upload
+
+```{r warning=FALSE, message = FALSE}
+rm(list=ls())         # to clean the memeory
+library(rpart)        # package for decision tree
+library(randomForest) # package for random forest
+library(e1071)        # package for support vector machine
+library(neuralnet)    # package for neural network
+library(PRROC)        # package for ROC curves
 ```
 
-```{r}
+## Data Upload
+
+In the following chuck of code you need to set the \texttt{R} working directory. Set this directory to be the path to the same folder where you will store the \texttt{mock_data.Rdata} file. Upload the data by using the \texttt{load} function.
+
+```{r warning=FALSE}
+setwd("...")
 load("mock_data.Rdata")
 ```
 
+# A Simple Supervised Learning Routing
 
 This simple step-by-step guide should aid the reader in designing a supervised learning (SL) routine to predict outcomes from input data.
 
+1. Check that information on the outcome of interest is contained for the observations that are later used to train and test the SL algorithm, i.e. that the dataset is labeled. The outcome variable is the \texttt{failure} variable.
+
+```{r}
+summary(mock_data)
+```
+
+
+2. Prepare the matrix of input attributes to a machine-readable format.
+
+```{r}
+predictors <- c("consdummy", "capital_intensity", "labour_product", "fin_cons" ,
+                "inv", "ICR_failure", "NEG_VA", "misallocated_fixed","profitability",
+                "real_SA","Z_score", "zone","dummy_patents", "dummy_trademark",
+                "financial_sustainability","car","liquidity_return","pension_tax_debts")
+formula <- as.formula(paste("as.factor(failure) ~", paste(predictors, collapse="+")))
+```
+ 
+3. Choose how to split your data between training and testing set. Keep in mind that both training and testing set have to stay sufficiently large to train the algorithm or to validate its performance, respectively. Use resampling techniques in case of low data dimensions and stratified sampling whenever labels are highly unbalanced  (undersampling, oversampling). If the data has a time dimension, make sure that the training set is formed by observations that occured before the ones in the testing set. 
+
+In the following we depict a simple 2 folds split between traning and testing data. 75\% of the data will be used to train the model and 25\% to test the model. Set a seed for reproducible results.
+
+```{r}
+set.seed(2020)
+index <- sample(nrow(mock_data), size = nrow(mock_data)*0.75, replace = FALSE)
+train <- mock_data[index,]
+test <- mock_data[-index,]
+```
+
+
+4. Choose the SL algorithm that best suits your need. Possible dimensions to evaluate are prediction performance, simplicity of result interpretation and CPU runtime. Often a \textit{horserace} between many algorithms is performed and the one with the highest prediction performance is chosen. Here, we will train all the four algorithms that we focus on: \textit{decision tree, random forest, support vector machine} and \textit{artificial neural network}.
+
+5. Train the algorithms using the training set only.
+
+```{r}
+set.seed(2020)
+# Decision Tree
+dt <- rpart(formula, data=train)
+
+# Random Forest
+rf <- randomForest(formula, data=train)
+
+# Support Vector Machine 
+svm.model <- svm(formula, data=train)
+
+# Artificial Neural Network
+nnet <- neuralnet(formula, data=train)
+```
+
+6. Once the algorithms are trained, use them to predict the outcome on the testing set. Compare the predicted outcomes with the true outcomes.
+
+```{r}
+# Predicted outcomes Decision Tree
+dt.pred <- predict(dt, newdata=test, type='class')
+
+# Predicted outcomes Random Forest
+rf.pred <- predict(rf, newdata=test, type='class')
+
+# Predicted outcomes Support Vector Machine
+svm.pred <- predict(svm.model, newdata = test)
+
+# Predicted Outcomes Artificial Neural Network
+nnet.prob <- compute(nnet,test)
+nnet.pred <- ifelse(nnet.prob$net.result[,1] < 0.5, 1, 0)
+```
+
+7. Choose the performance measure on which to evaluate the algorithms. A popular performance measure is the Area Under the receiver operating Curve (AUC). 
+
+```{r}
+# AUC Decision Tree
+fg.dt <- dt.pred[test$failure==1]
+bg.dt <- dt.pred[test$failure==0]
+roc.dt <- roc.curve(scores.class0 = fg.dt, scores.class1 = bg.dt, curve = T)
+plot(roc.dt) 
+
+
+# AUC Random Forest
+fg.rf <- rf.pred[test$failure==1]
+bg.rf <- rf.pred[test$failure==0]
+roc.rf <- roc.curve(scores.class0 = fg.rf, scores.class1 = bg.rf, curve = T)
+plot(roc.rf) 
+
+# AUC Support Vector Machine
+fg.svm <- svm.pred[test$failure==1]
+bg.svm <- svm.pred[test$failure==0]
+roc.svm <- roc.curve(scores.class0 = fg.svm, scores.class1 = bg.svm, curve = T)
+plot(roc.svm) 
+
+# AUC Artificial Neural Network
+fg.nnet <- nnet.pred[test$failure==1]
+bg.nnet <- nnet.pred[test$failure==0]
+roc.nnet <- roc.curve(scores.class0 = fg.nnet, scores.class1 = bg.nnet, curve = T)
+plot(roc.nnet) 
+```
+
+8. Once prediction performance has been assessed, the algorithm can be used to predict outcomes for observations for which the outcome is unknown. Note that valid predictions require that new observations should contain similar features and need to be independent from the outcome of old ones.
 
