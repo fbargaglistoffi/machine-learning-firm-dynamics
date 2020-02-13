@@ -135,8 +135,11 @@ We focus on the function _nnet_ in the *R* package *nnet"*. The documentation ca
 
 * <tt>`formula`</tt>: is in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1+predictor2+ect.);
 * <tt>`data`</tt>: specifies the data frame;
-* <tt>`weights`</tt>: weights for each example -- if missing defaults to 1.
-* <tt>`size`</tt>: number of units in the hidden layer. Can be zero if there are skip-layer units.
+* <tt>`weights`</tt>: weights for each example -- if missing defaults to 1;
+* <tt>`size`</tt>: number of units in the hidden layer. Can be zero if there are skip-layer units;
+* <tt>`rang`</tt>: initial random weights on [-rang, rang]. Value about 0.5 unless the inputs are large, in which case it should be chosen so that rang * max(|x|) is about 1;
+* <tt>`decay`</tt>: parameter for weight decay (default is 0);
+* <tt>`maxit`</tt>: number of iterations (default is 100).
 
 ```R
 # Neural network with the nnet package
