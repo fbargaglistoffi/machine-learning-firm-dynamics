@@ -39,7 +39,7 @@ Decision trees commonly consist of a sequence of binary decision rules (nodes) o
 
 We focus on the function _rpart_ in the *R* package *Rpart*. The documentation can be found [here](https://www.rdocumentation.org/packages/rpart/versions/4.1-15/topics/rpart).
 
-* <tt>`formula`</tt>: is in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1+predictor2+ect.);
+* <tt>`formula`</tt>: a formula in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1+predictor2+ect.);
 * <tt>`data`</tt>: specifies the data frame;
 * <tt>`method`</tt>: "class" for a classification tree, "anova" for a regression tree;
 * <tt>`control`</tt>: optional parameters for controlling tree growth. For example, control=rpart.control(minsplit=30, cp=0.001) requires that the minimum number of observations in a node be 30 before attempting a split and that a split must decrease the overall lack of fit by a factor of 0.001 (cost complexity factor) before being attempted.
@@ -124,8 +124,34 @@ obj_rf=randomForest(trainfeatures,y=trainoutcome, xtest=testfeatures,ytest=testo
 Support vector machines (SVM) & Support vector machine algorithms estimate a hyperplane over the feature space to classify observations. The vectors that span the hyperplane are called support vectors. They are chosen such that the overall distance (called margin) between the data points and the hyperplane as well as the prediction accuracy is maximized (see also Ssteinwart 2008).
 
 ### Example usage in R
+We focus on the function _svm_ in the *R* package *svm"*. The documentation can be found [here](https://www.rdocumentation.org/packages/e1071/versions/1.7-3/topics/svm)
 
 ## 2.4 Artificial Neural Network
+
+* <tt>`formula`</tt>:  a formula in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1+predictor2+ect.);
+* <tt>`data`</tt>:  an optional data frame containing the variables in the model. By default the variables are taken from the environment which ‘svm’ is called from;
+* <tt>`scale`</tt>: a logical vector indicating the variables to be scaled.
+* <tt>`type`</tt>: svm can be used as a classification machine, as a regression machine, or for novelty detection;
+* <tt>`kernel`</tt>: the kernel used in training and predicting. You might consider changing some of the following parameters, depending on the kernel type.
+
+```R
+# Support Vector Machine with the e1071 package
+install.package("e1071") # if not already installed
+library("e1071")
+
+# Train the Support Vector Machine
+obj_svm <- svm(formula, data = train)
+
+# Predicted outcomes Support Vector Machine
+svm.pred <- predict(obj_model, newdata = test)
+      
+      #generate table that compares true outcomes of the testing set with predicted outcomes of random forest
+        svm_tab= table(true=testoutcome, pred= svm.pred)
+      #generate ROC object based on predictions in testing set
+        svm_roc=roc(testoutcome ~ svm.pred)
+      #calculate AUC value of predictions in testing set
+        svm_auc=pROC::auc(svm_roc)
+```
 
 ### Description
 (Deep) Artificial Neural Networks (ANN) & Inspired from biological networks, every neural network consists of at least three layers: an input layer containing feature information, at least one hidden layer (deep ANN are ANN with more than one hidden layer), and an output layer returning the predicted values. Each Layer consists of nodes (neurons) who are connected via edges across layers. During the learning process, edges that are more important are reinforced. Neurons may then only send a signal if the signal received is strong enough (see for example Hassoun, ).
@@ -133,7 +159,7 @@ Support vector machines (SVM) & Support vector machine algorithms estimate a hyp
 ### Example usage in R
 We focus on the function _nnet_ in the *R* package *nnet"*. The documentation can be found [here](https://www.rdocumentation.org/packages/nnet/versions/7.3-12/topics/nnet).
 
-* <tt>`formula`</tt>: is in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1+predictor2+ect.);
+* <tt>`formula`</tt>: a formula in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1+predictor2+ect.);
 * <tt>`data`</tt>: specifies the data frame;
 * <tt>`weights`</tt>: weights for each example -- if missing defaults to 1;
 * <tt>`size`</tt>: number of units in the hidden layer. Can be zero if there are skip-layer units;
@@ -142,7 +168,11 @@ We focus on the function _nnet_ in the *R* package *nnet"*. The documentation ca
 * <tt>`maxit`</tt>: number of iterations (default is 100).
 
 ```R
-# Neural network with the nnet package
+# Neural network with the neural net package
+install.packages("neuralnet") # in not already installed
+library(neuralnet)
+
+# Train the Neural Network
 nnet_fit <- nnet(formula, data = train, size = 2, rang = 0.1, decay = 5e-4, maxit = 200)
 
 test.cl <- function(true, pred) {
