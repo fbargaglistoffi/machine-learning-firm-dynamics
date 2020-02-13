@@ -1,10 +1,10 @@
 # Supervised Learning for the Prediction of Firm Dynamics
 
-Repository for the Chapter on <a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a> by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni in the book "Data Science for Economics and Finance: Methodologies and Applications" by S. Consoli,  D. Reforgiato Recupero, M. Saisana. 
+This repository containts the additional material for the Chapter on <a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a> by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni in the book "Data Science for Economics and Finance: Methodologies and Applications" by S. Consoli,  D. Reforgiato Recupero, M. Saisana. 
 
-The following repository is organized in two Sections: in the first Section we introduce a step-by-step guide for the reader that is new to machine learning to guide her/him in designing a supervised learning routine; in the Second section we introduce the main algorithms that were used for prediction tasks relevantat different stages of the company life cycle together with a simple guide on their implementation in *R*.
+In the first Section of this repository we introduce a step-by-step guide for the reader that is new to machine learning to guide her/him in designing a supervised learning routine; in the second Section we provide further details on the main algorithms used for prediction tasks at different stages of the company life cycle together with simple examples on their implementation in *R*.
 
-<a href="https://arxiv.org/abs/1706.09523">Here</a> we show how to implement the supervised learning routine to predict bankruptcy on a sample of a firm level dataset. For each step of the routine we provide details and comments on the *R* code.
+<a href=https://github.com/fbargaglistoffi/supervised-learning-firm-dynamics/blob/master/SL_analysis.Rmd>Here</a> we show how to implement the supervised learning routine to predict firms' bankruptcy on a dataset of Italian firms' financial accounts. The <a href=https://github.com/fbargaglistoffi/supervised-learning-firm-dynamics/blob/master/mock_data.Rdata>dataset</a> is a small, random sample of real firm level data used by F.J. Bargagli-Stoffi, M. Riccaboni and A. Rungi for the main analysis of the paper <a href="https://arxiv.org/abs/1706.09523">"Machine learning for zombie hunting. Firms' failures, financial constraints, and misallocation "</a>.  For more details on the predictors, we refer the reader to the original paper.
 
 # 1. A Simple Supervised Learning Routine
 
