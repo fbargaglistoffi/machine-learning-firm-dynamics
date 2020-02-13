@@ -32,16 +32,19 @@ This simple step-by-step guide should aid the reader in designing a supervised l
 
 ## 2.1 Decision Trees
 
+### Description
 Decision trees commonly consist of a sequence of binary decision rules (nodes) on which the tree splits into branches (edges). At each final branch (leaf node) a decision regarding the outcome is estimated.  The sequence of decision rules and the location of each cut-off point is based on minimizing a measure of node purity (e.g., Gini index, or entropy). Decision trees are easy to interpret but sensitive to changes in the feature space, frequently lowering their out of sample performance (see Breiman 2017 for a detailed introduction).
+
+### Example usage in R
 
 
 
 ## 2.2 Random Forest
 
-#### Description
+### Description
 Instead of estimating just one DT, random forest resamples the training set observations to estimate multiple trees. For each tree at each node a sample of $m$ predictors is chosen randomly from the feature space. To obtain the final prediction the outcomes all trees are averaged or in classification tasks the chosen by majority vote (see also the original contribution of Breiman, 2001)
 
-#### Example usage in R
+### Example usage in R
 We focus on the function _RandomForest_ in the *R* package *RandomForest*. The documentation can be found [here](https://www.rdocumentation.org/packages/randomForest/versions/4.6-14/topics/randomForest).
 
 Selection of inputs the function takes :
@@ -79,16 +82,17 @@ library("pROC")
 
 ## 2.3 Support Vector Machines
 
-Support vector machines (SVM) & Support vector machine algorithms estimate a hyperplane over the feature space to classify observations. The vectors that span the hyperplane are called support vectors. They are chosen such that the overall distance (called margin) between the data points and the hyperplane as well as the prediction accuracy is maximized (see also Ssteinwart 2008)
+### Description
+Support vector machines (SVM) & Support vector machine algorithms estimate a hyperplane over the feature space to classify observations. The vectors that span the hyperplane are called support vectors. They are chosen such that the overall distance (called margin) between the data points and the hyperplane as well as the prediction accuracy is maximized (see also Ssteinwart 2008).
+
+### Example usage in R
 
 ## 2.4 Artificial Neural Network
 
- (Deep) Artificial Neural Networks (ANN) & Inspired from biological networks, every neural network consists of at least three layers: an input layer containing feature information, at least one hidden layer (deep ANN are ANN with more than one hidden layer), and an output layer returning the predicted values. Each Layer consists of nodes (neurons) who are connected via edges across layers. During the learning process, edges that are more important are reinforced. Neurons may then only send a signal if the signal received is strong enough (see for example Hassoun, ).
+### Description
+(Deep) Artificial Neural Networks (ANN) & Inspired from biological networks, every neural network consists of at least three layers: an input layer containing feature information, at least one hidden layer (deep ANN are ANN with more than one hidden layer), and an output layer returning the predicted values. Each Layer consists of nodes (neurons) who are connected via edges across layers. During the learning process, edges that are more important are reinforced. Neurons may then only send a signal if the signal received is strong enough (see for example Hassoun, ).
 
-
-Temptative outline
-
-The function takes as inputs:
+### Example usage in R
 
 * <tt>`y`</tt>: the outcome variable;
 * <tt>`w`</tt>: the reception of the treatment variable (binary);
@@ -102,7 +106,6 @@ The _mm_bcf_iv_ function returns the discovered sub-population, the conditional 
 
 More details on the R code for the BCF-IV function can be found [here](https://github.com/barstoff/BCF-IV/blob/master/Functions/BCF-IV_in_detail.pdf).
 
-### Example usage
 
 ```R
 source("bcf-iv.R")
