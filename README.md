@@ -1,10 +1,10 @@
 # Supervised Learning for the Prediction of Firm Dynamics
 
-This repository containts the additional material for the Chapter on <a href="https://arxiv.org/abs/1706.09523">"Supervised learning for the prediction of firm dynamics"</a> by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni in the book "Data Science for Economics and Finance: Methodologies and Applications" by S. Consoli,  D. Reforgiato Recupero, M. Saisana. 
+This repository containts the additional material for the Chapter on _"Supervised learning for the prediction of firm dynamics"_ by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni in the book _"Data Science for Economics and Finance: Methodologies and Applications"_ by S. Consoli,  D. Reforgiato Recupero, M. Saisana. 
 
 In the first Section of this repository we introduce a step-by-step guide for the reader that is new to machine learning to guide her/him in designing a supervised learning routine; in the second Section we provide further details on the main algorithms used for prediction tasks at different stages of the company life cycle together with simple examples on their implementation in *R*.
 
-<a href=https://github.com/fbargaglistoffi/supervised-learning-firm-dynamics/blob/master/SL_analysis.Rmd>Here</a> we show how to implement the supervised learning routine to predict firms' bankruptcy on a dataset of Italian firms' financial accounts. The <a href=https://github.com/fbargaglistoffi/supervised-learning-firm-dynamics/blob/master/mock_data.Rdata>dataset</a> is a small, random sample of real firm level data used by F.J. Bargagli-Stoffi, M. Riccaboni and A. Rungi for the main analysis of the paper <a href="https://arxiv.org/abs/1706.09523">"Machine learning for zombie hunting. Firms' failures, financial constraints, and misallocation "</a>.  For more details on the predictors, we refer the reader to the original paper.
+<a href=https://github.com/fbargaglistoffi/supervised-learning-firm-dynamics/blob/master/SL_analysis.Rmd>Here</a> we show how to implement the supervised learning routine to predict firms' bankruptcy on a dataset of Italian firms' financial accounts. The <a href=https://github.com/fbargaglistoffi/supervised-learning-firm-dynamics/blob/master/mock_data.Rdata>dataset</a> is a small, random sample of real firm level data used by F.J. Bargagli-Stoffi, M. Riccaboni and A. Rungi for the main analysis of the paper _"Machine learning for zombie hunting. Firms' failures, financial constraints, and misallocation"_.  For more details on the predictors, we refer the reader to the original paper.
 
 # 1. A Simple Supervised Learning Routine
 
@@ -13,18 +13,18 @@ This simple step-by-step guide should aid the reader in designing a supervised l
 1. Check that information on the outcome of interest is contained for the observations that are later used to train and test the SL algorithm, i.e. that the data set is labeled. 
 
 2. Prepare the matrix of input attributes to a machine-readable format.
-  * In case of missing values in the input attributes, this missingness has to be dealt with as it can impact results (see xy for more information).
-  * In case it is ambiguous how to select the attributes used as input, the user might want to perform a feature selection step first (see XY for more information).
+  * In case of missing values in the input attributes, this missingness has to be dealt with as it can impact results (see _"Machine learning for zombie hunting. Firms' failures, financial constraints, and misallocation"_ by Bargagli Stoffi, Riccaboni and Rungi for more information).
+  * In case it is ambiguous how to select the attributes used as input, the user might want to perform a feature selection step first (see [this paper](https://www.sciencedirect.com/science/article/pii/S0925231218302911) for more information).
  
-3. Choose how to split your data between training and testing set. Keep in mind that both training and testing set have to stay sufficiently large to train the algorithm or to validate its performance, respectively.  Use resampling techniques in case of low data dimensions and stratified sampling whenever labels are highly unbalanced. If the data has a time dimension, make sure that the training set is formed by observations that occured before the ones in the testing set. 
+3. Choose how to split your data between training and testing set. Keep in mind that both training and testing set have to stay sufficiently large to train the algorithm or to validate its performance, respectively. Use resampling techniques in case of low data dimensions and stratified sampling whenever labels are highly unbalanced. If the data has a time dimension, make sure that the training set is formed by observations that occured before the ones in the testing set. 
 
-4. Choose the SL algorithm that best suits your need. Possible dimensions to evaluate are prediction performance, simplicity of result interpretation and CPU runtime. Often a horserase between many algorithms is performed and the one with the highest prediction performance is chosen. There are already many algorithms already available "off the shelf" - consult this page for running examples in R.
+4. Choose the SL algorithm that best suits your need. Possible dimensions to evaluate are prediction performance, simplicity of result interpretation and CPU runtime. Often a horserase between many algorithms is performed and the one with the highest prediction performance is chosen. There are already many algorithms already available "off the shelf" - consult [this page](https://cran.r-project.org/web/views/MachineLearning.html) for a comprehensive review of the main packages for machine learning in *R*.
 
-5. Train the algorithm using the training set only. In case hyperparameters of the algorithm need to be set, choose them using Crossfold validation on the training set, or better keep part of the training set only for hyperparameter tuning - but do not use the testing set until the algorithms are fully specified.
+5. Train the algorithm using the training set only. In case hyperparameters of the algorithm need to be set, choose them using _crossfold validation_ on the training set, or better keep part of the training set only for hyperparameter tuning - but do not use the testing set until the algorithms are fully specified.
 
-6. Once the algorithm is trained, use it to predict the outcome on the testing set. Compare the predicted outcomes with the true outcomes
+6. Once the algorithm is trained, use it to predict the outcome on the testing set. Compare the predicted outcomes with the true outcomes.
 
-7. Choose the performance measure on which to evaluate the algorithm(s). Popular performance measures are Accuracy and Area Under the receiver operating Curve (AUC). Choose sensitive performance measure in case your data set is unbalanced such as balanced Accuracy.
+7. Choose the performance measure on which to evaluate the algorithm(s). Popular performance measures are _Accuracy_ and _Area Under the receiver operating Curve_ (AUC). Choose sensitive performance measure in case your data set is unbalanced such as _Balanced Accuracy_ or the _F-score_.
 
 8. Once prediction performance has been assessed, the algorithm can be used to predict outcomes for observations for which the outcome is unknown. Note that valid predictions require that new observations should contain similar features and need to be independent from the outcome of old ones.
 
@@ -33,38 +33,38 @@ This simple step-by-step guide should aid the reader in designing a supervised l
 ## 2.1 Decision Trees
 
 ### Description
-Decision trees commonly consist of a sequence of binary decision rules (nodes) on which the tree splits into branches (edges). At each final branch (leaf node) a decision regarding the outcome is estimated.  The sequence of decision rules and the location of each cut-off point is based on minimizing a measure of node purity (e.g., Gini index, or entropy). Decision trees are easy to interpret but sensitive to changes in the feature space, frequently lowering their out of sample performance (see Breiman 2017 for a detailed introduction).
+Decision trees commonly consist of a sequence of binary decision rules (nodes) on which the tree splits into branches (edges). At each final branch (leaf node) a decision regarding the outcome is estimated.  The sequence of decision rules and the location of each cut-off point is based on minimizing a measure of node purity (e.g., Gini index, or entropy for classification tasks, mean-squared-error for regression tasks). Decision trees are easy to interpret but sensitive to changes in the feature space, frequently lowering their out of sample performance (see [Breiman 2017](https://www.taylorfrancis.com/books/9781315139470) for a detailed introduction).
 
 ### Example usage in R
 
 We focus on the function _rpart_ in the *R* package *Rpart*. The documentation can be found [here](https://www.rdocumentation.org/packages/rpart/versions/4.1-15/topics/rpart).
 
-* <tt>`formula`</tt>: a formula in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1+predictor2+ect.);
+* <tt>`formula`</tt>: a formula in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1 + predictor2 + ect.);
 * <tt>`data`</tt>: specifies the data frame;
 * <tt>`method`</tt>: "class" for a classification tree, "anova" for a regression tree;
 * <tt>`control`</tt>: optional parameters for controlling tree growth. For example, control=rpart.control(minsplit=30, cp=0.001) requires that the minimum number of observations in a node be 30 before attempting a split and that a split must decrease the overall lack of fit by a factor of 0.001 (cost complexity factor) before being attempted.
 
 ```R
-# Classification Tree with rpart
+# Decision Tree with rpart
 install.library("rpart") # if not already installed
 library(rpart)
 
-# grow tree
+# Grow the tree
 dt <- rpart(trainoutcome ~ trainfeatures, method="class", data= train_data, control=rpart.control(minsplit=30, cp=0.001))
 
     printcp(dt) # display the results
     plotcp(dt) # visualize cross-validation results
     summary(dt) # detailed summary of splits
 
-# plot tree
+# Plot tree
 plot(dt, uniform=TRUE, main="Classification Tree")
 text(dt, use.n=TRUE, all=TRUE, cex=.8)
 
-# create attractive postscript plot of tree
+# Create attractive postscript plot of tree
 post(dt, file = "c:/tree.ps",
    title = "Classification Tree")
    
-# get predicted values
+# Get predicted values
 dt.pred <- predict(dt, newdata=test, type='class')
    
          # generate table that compares true outcomes of the testing set with predicted outcomes of decisiontree
@@ -78,7 +78,7 @@ dt.pred <- predict(dt, newdata=test, type='class')
 ## 2.2 Random Forest
 
 ### Description
-Instead of estimating just one DT, random forest resamples the training set observations to estimate multiple trees. For each tree at each node a sample of $m$ predictors is chosen randomly from the feature space. To obtain the final prediction the outcomes all trees are averaged or in classification tasks the chosen by majority vote (see also the original contribution of Breiman, 2001)
+Instead of estimating just one _DT_, random forest resamples the training set observations to estimate multiple trees. For each tree at each node a sample of _m_ predictors is chosen randomly from the feature space. To obtain the final prediction the outcomes all trees are averaged or in classification tasks the chosen by majority vote (see also the original contribution of Breiman, 2001)
 
 ### Example usage in R
 We focus on the function _RandomForest_ in the *R* package *RandomForest*. The documentation can be found [here](https://www.rdocumentation.org/packages/randomForest/versions/4.6-14/topics/randomForest).
@@ -96,8 +96,6 @@ Selection of inputs the function takes :
 * <tt>`seed`</tt>: (optional) make RF estimation result reproducable? ;
 
 The _RandomForest_ function returns an object which is a list containing information such as:  the predicted values of the testing set in `$test$predicted`, importance measures in `$importance` and the entire forest `$forest` if `keep.forest==TRUE`.
-
-
 
 
 ```R
@@ -121,7 +119,7 @@ obj_rf=randomForest(trainfeatures,y=trainoutcome, xtest=testfeatures,ytest=testo
 ## 2.3 Support Vector Machines
 
 ### Description
-Support vector machines (SVM) & Support vector machine algorithms estimate a hyperplane over the feature space to classify observations. The vectors that span the hyperplane are called support vectors. They are chosen such that the overall distance (called margin) between the data points and the hyperplane as well as the prediction accuracy is maximized (see also Ssteinwart 2008).
+Support vector machines (SVM) & Support vector machine algorithms estimate a hyperplane over the feature space to classify observations. The vectors that span the hyperplane are called support vectors. They are chosen such that the overall distance (called margin) between the data points and the hyperplane as well as the prediction accuracy is maximized (see also [Steinwart 2008](https://www.springer.com/gp/book/9780387772417)).
 
 ### Example usage in R
 We focus on the function _svm_ in the *R* package *svm"*. The documentation can be found [here](https://www.rdocumentation.org/packages/e1071/versions/1.7-3/topics/svm)
@@ -145,16 +143,16 @@ obj_svm <- svm(formula, data = train)
 # Predicted outcomes Support Vector Machine
 svm.pred <- predict(obj_model, newdata = test)
       
-      #generate table that compares true outcomes of the testing set with predicted outcomes of random forest
+      # Generate table that compares true outcomes of the testing set with predicted outcomes of random forest
         svm_tab= table(true=testoutcome, pred= svm.pred)
-      #generate ROC object based on predictions in testing set
+      # Generate ROC object based on predictions in testing set
         svm_roc=roc(testoutcome ~ svm.pred)
-      #calculate AUC value of predictions in testing set
+      # Calculate AUC value of predictions in testing set
         svm_auc=pROC::auc(svm_roc)
 ```
 
 ### Description
-(Deep) Artificial Neural Networks (ANN) & Inspired from biological networks, every neural network consists of at least three layers: an input layer containing feature information, at least one hidden layer (deep ANN are ANN with more than one hidden layer), and an output layer returning the predicted values. Each Layer consists of nodes (neurons) who are connected via edges across layers. During the learning process, edges that are more important are reinforced. Neurons may then only send a signal if the signal received is strong enough (see for example Hassoun, ).
+(Deep) Artificial Neural Networks (ANN) & Inspired from biological networks, every neural network consists of at least three layers: an input layer containing feature information, at least one hidden layer (deep ANN are ANN with more than one hidden layer), and an output layer returning the predicted values. Each Layer consists of nodes (neurons) who are connected via edges across layers. During the learning process, edges that are more important are reinforced. Neurons may then only send a signal if the signal received is strong enough (see for example [Hassoun 2016](https://mitpress.mit.edu/books/fundamentals-artificial-neural-networks)).
 
 ### Example usage in R
 We focus on the function _nnet_ in the *R* package *nnet"*. The documentation can be found [here](https://www.rdocumentation.org/packages/nnet/versions/7.3-12/topics/nnet).
