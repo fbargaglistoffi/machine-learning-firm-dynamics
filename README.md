@@ -1,6 +1,6 @@
 # Supervised Learning for the Prediction of Firm Dynamics
 
-This repository containts the additional material for the Chapter on _"Supervised learning for the prediction of firm dynamics"_ by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni in the book _"Data Science for Economics and Finance: Methodologies and Applications"_ by S. Consoli,  D. Reforgiato Recupero, M. Saisana. 
+This repository contains the additional material for the Chapter on _"Supervised learning for the prediction of firm dynamics"_ by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni in the book _"Data Science for Economics and Finance: Methodologies and Applications"_ by S. Consoli,  D. Reforgiato Recupero, M. Saisana. 
 
 In the first Section of this repository we introduce a step-by-step guide for the reader that is new to machine learning to guide her/him in designing a supervised learning routine; in the second Section we provide further details on the main algorithms used for prediction tasks at different stages of the company life cycle together with simple examples on their implementation in *R*.
 
@@ -20,7 +20,7 @@ This simple step-by-step guide should aid the reader in designing a supervised l
 
 4. Choose the SL algorithm that best suits your need. Possible dimensions to evaluate are prediction performance, simplicity of result interpretation and CPU runtime. Often a horserase between many algorithms is performed and the one with the highest prediction performance is chosen. There are already many algorithms already available "off the shelf" - consult [this page](https://cran.r-project.org/web/views/MachineLearning.html) for a comprehensive review of the main packages for machine learning in *R*.
 
-5. Train the algorithm using the training set only. In case hyperparameters of the algorithm need to be set, choose them using _crossfold validation_ on the training set, or better keep part of the training set only for hyperparameter tuning - but do not use the testing set until the algorithms are fully specified.
+5. Train the algorithm using the training set only. In case hyper-parameters of the algorithm need to be set, choose them using _crossfold validation_ on the training set, or better keep part of the training set only for hyperparameter tuning - but do not use the testing set until the algorithms are fully specified.
 
 6. Once the algorithm is trained, use it to predict the outcome on the testing set. Compare the predicted outcomes with the true outcomes.
 
@@ -93,7 +93,7 @@ Selection of inputs the function takes :
 * <tt>`ntree`</tt>: (optional) number of trees to grow. This should not be set to too small a number, to ensure that every input row gets predicted at least a few times;
 * <tt>`importance`</tt>: (optional) Should importance of predictors be assessed? ;
 * <tt>`keep.forest`</tt>: (optional) Should the forest be stored in the object (for later prediction tasks)? ;
-* <tt>`seed`</tt>: (optional) make RF estimation result reproducable? ;
+* <tt>`seed`</tt>: (optional) set an arbitrary numerical value to make RF estimation result reproducable ;
 
 The _RandomForest_ function returns an object which is a list containing information such as:  the predicted values of the testing set in `$test$predicted`, importance measures in `$importance` and the entire forest `$forest` if `keep.forest==TRUE`.
 
@@ -124,7 +124,6 @@ Support vector machines (SVM) & Support vector machine algorithms estimate a hyp
 ### Example usage in R
 We focus on the function _svm_ in the *R* package *e1071*. The documentation can be found [here](https://www.rdocumentation.org/packages/e1071/versions/1.7-3/topics/svm)
 
-## 2.4 Artificial Neural Network
 
 * <tt>`formula`</tt>:  a formula in the format of the formula used to train the decision tree (e.g. outcome ~ predictor1+predictor2+ect.);
 * <tt>`data`</tt>:  an optional data frame containing the variables in the model. By default the variables are taken from the environment which ‘svm’ is called from;
@@ -150,6 +149,8 @@ svm.pred <- predict(obj_model, newdata = test)
       # Calculate AUC value of predictions in testing set
         svm_auc=pROC::auc(svm_roc)
 ```
+
+## 2.4 Artificial Neural Network
 
 ### Description
 (Deep) Artificial Neural Networks (ANN) & Inspired from biological networks, every neural network consists of at least three layers: an input layer containing feature information, at least one hidden layer (deep ANN are ANN with more than one hidden layer), and an output layer returning the predicted values. Each Layer consists of nodes (neurons) who are connected via edges across layers. During the learning process, edges that are more important are reinforced. Neurons may then only send a signal if the signal received is strong enough (see for example [Hassoun 2016](https://mitpress.mit.edu/books/fundamentals-artificial-neural-networks)).
