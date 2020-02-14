@@ -31,7 +31,7 @@ library(PRROC)        # package for ROC curves
 
 ## Data Upload
 
-In the following chuck of code you need to set the \texttt{R} working directory. Set this directory to be the path to the same folder where you will store the \texttt{mock_data.Rdata} file. Upload the data by using the \texttt{load} function.
+In the following chunk of code you need to set the \texttt{R} working directory. Set this directory to be the path to the same folder where you will store the \texttt{mock_data.Rdata} file. Upload the data by using the \texttt{load} function.
 
 ```{r warning=FALSE}
 setwd("...")
