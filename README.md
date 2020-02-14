@@ -122,7 +122,7 @@ obj_rf=randomForest(trainfeatures,y=trainoutcome, xtest=testfeatures,ytest=testo
 Support vector machines (SVM) & Support vector machine algorithms estimate a hyperplane over the feature space to classify observations. The vectors that span the hyperplane are called support vectors. They are chosen such that the overall distance (called margin) between the data points and the hyperplane as well as the prediction accuracy is maximized (see also [Steinwart 2008](https://www.springer.com/gp/book/9780387772417)).
 
 ### Example usage in R
-We focus on the function _svm_ in the *R* package *svm"*. The documentation can be found [here](https://www.rdocumentation.org/packages/e1071/versions/1.7-3/topics/svm)
+We focus on the function _svm_ in the *R* package *e1071*. The documentation can be found [here](https://www.rdocumentation.org/packages/e1071/versions/1.7-3/topics/svm)
 
 ## 2.4 Artificial Neural Network
 
