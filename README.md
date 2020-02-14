@@ -13,7 +13,7 @@ This simple step-by-step guide should aid the reader in designing a supervised l
 1. Check that information on the outcome of interest is contained for the observations that are later used to train and test the SL algorithm, i.e. that the data set is labeled. 
 
 2. Prepare the matrix of input attributes to a machine-readable format.
-  * In case of missing values in the input attributes, this missingness has to be dealt with as it can impact results (see _"Machine learning for zombie hunting. Firms' failures, financial constraints, and misallocation"_ by Bargagli Stoffi, Riccaboni and Rungi for more information).
+  * In case of missing values in the input attributes, this missingness has to be dealt with as it can impact results (see _"Machine learning for zombie hunting. Firms' failures, financial constraints, and misallocation"_ by Bargagli-Stoffi, Riccaboni and Rungi for more information).
   * In case it is ambiguous how to select the attributes used as input, the user might want to perform a feature selection step first (see [this paper](https://www.sciencedirect.com/science/article/pii/S0925231218302911) for more information).
  
 3. Choose how to split your data between training and testing set. Keep in mind that both training and testing set have to stay sufficiently large to train the algorithm or to validate its performance, respectively. Use resampling techniques in case of low data dimensions and stratified sampling whenever labels are highly unbalanced. If the data has a time dimension, make sure that the training set is formed by observations that occured before the ones in the testing set. 
