@@ -1,6 +1,6 @@
 # Supervised Learning for the Prediction of Firm Dynamics
 
-This repository contains the additional material for the Chapter on _"Supervised learning for the prediction of firm dynamics"_ by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni in the book _"Data Science for Economics and Finance: Methodologies and Applications"_ by S. Consoli,  D. Reforgiato Recupero, M. Saisana. 
+This repository contains the additional material for the Chapter on ["Supervised learning for the prediction of firm dynamics"](https://arxiv.org/abs/2009.06413) by F.J. Bargagli-Stoffi, J. Niederreiter and M. Riccaboni in the book _"Data Science for Economics and Finance: Methodologies and Applications"_ by S. Consoli,  D. Reforgiato Recupero, M. Saisana. 
 
 In the first Section of this repository we introduce a step-by-step guide for the reader that is new to machine learning to guide her/him in designing a supervised learning routine; in the second Section we provide further details on the main algorithms used for prediction tasks at different stages of the company life cycle together with simple examples on their implementation in *R*.
 
